@@ -82,7 +82,7 @@ def train_baseline(args, device):
     elif args.resume:
         print(f"[WARNING] Checkpoint {args.resume} not found. Starting from scratch.")
 
-    # 4. Log Model Statistics (Thesis Requirement)
+    # 4. Log Model Statistics
     param_count = sum(p.numel() for p in model.parameters())
     model_size_mb = param_count * 4 / 1024 / 1024
     print(f"[STATS] Parameters: {param_count / 1e6:.2f} M")
@@ -150,4 +150,5 @@ def validate(model, loader, device):
             _, predicted = outputs.max(1)
             total += labels.size(0)
             correct += predicted.eq(labels).sum().item()
+
     return 100. * correct / total
